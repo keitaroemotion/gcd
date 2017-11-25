@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require "colorize"
+
+def frz(a, b, c)
+  "(#{a} - #{b} * #{c})"
+end
+
+def gcd(a, b)
+  c = b / a
+  d = b % a
+  f = a / d
+  g = a % d
+  h = d / g
+  i = d % g    
+  puts "#{b} = #{c} * #{a} + #{d} "
+  puts "#{a} = #{f} * #{d} + #{g} "
+  puts "#{d} = #{h} * #{g} + #{i} "
+  puts 
+  puts "#{frz(d, h, g)} = #{i} "
+  puts "#{frz(d, h, frz(a, f, d))} = #{i} "
+  disp = "#{frz(frz(b, c, a), h, frz(a, f, frz(b, c, a)))} = #{i} "
+  puts disp
+  puts disp.gsub(/(\-\s\d+\s\*\s[\(]*#{a})/, "\\1".red)
+  puts disp.gsub(/(\-\s\d+\s\*\s[\(]*#{b}|#{b})/, "\\1".green)
+end
+
+gcd(17, 40)
